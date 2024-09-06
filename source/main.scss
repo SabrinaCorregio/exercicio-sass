@@ -1,0 +1,120 @@
+$branco: white;
+
+@mixin notest {
+    text-decoration: none;
+}
+
+@mixin disp($tipo) {
+    @if $tipo == 'flex' {
+        display: flex;
+    } @else if $tipo == 'block' {
+        display: block;
+    }
+}
+
+@mixin button-style($padding, $border-radius, $margin) {
+    padding: $padding;
+    border-radius: $border-radius;
+    margin-top: $margin;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+}
+
+body {
+    background-color: $branco;
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #182C61;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    .container {
+        @include disp('flex');
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+    }
+}
+
+.menu {
+    @include disp('flex');
+
+    li {
+        font-weight: bold;
+        margin-left: 24px;
+
+    a {
+        color: $branco;
+        @include notest();
+    }
+    }
+}
+
+section {
+    padding: 56px 0;
+}
+
+.products {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 32.66%);
+    column-gap: 1%;
+    row-gap: 4%;
+    width: 100%;
+
+    .product-item img {
+    width: 100%;
+    border-radius: 16px;
+    }
+
+    .product-button {
+    @include disp('block');
+    background-color: #44bd32;
+    color: $branco;
+    text-align: center;
+    @include button-style(8px 0, 8px, 8px);
+    @include notest();
+
+    &:hover {
+        background-color: #4cd137;
+    }
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .container {
+    max-width: 80%;
+    }
+
+    .products {
+    grid-template-columns: repeat(2, 48.5%);
+    column-gap: 3%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .products {
+    display: block;
+
+    .product-item {
+        margin-bottom: 32px;
+    }
+    }
+}
